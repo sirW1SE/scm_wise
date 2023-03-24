@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="scm_distribution_form_views">
+        <field name="name">Distribution form</field>
+        <field name="model">scm.distribution</field>
+        <field name="arch" type="xml">
+            <form string="Choose your branch">
+                <group>
+                    <h1><p>Distribution Report</p></h1>
+                </group>
+                <footer>
+                    <button name="get_dis_excel_report" string="XLSXexport" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="scm_distribution_action">
+        <field name="name">distribution</field>
+        <field name="res_model">scm.distribution</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="scm_abc.scm_distribution_form_views"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
