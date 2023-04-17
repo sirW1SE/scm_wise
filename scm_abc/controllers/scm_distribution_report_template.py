@@ -68,7 +68,7 @@ class ScmABCExcelReportController(http.Controller):
 
         # the report title
         # merge the A1 to E1 cell and apply the style font size : 14, font weight : bold
-        sheet2.merge_range('A1:I1', 'As of ' + str(wizard.end_date), title_style)
+        sheet2.merge_range('A1:I1', 'Sales as of ' + str(wizard.end_date), title_style)
 
         # End of sheet 2
 
