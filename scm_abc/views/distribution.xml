@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="scm_distribution_form_views">
+        <field name="name">SCM form</field>
+        <field name="model">scm.distribution</field>
+        <field name="arch" type="xml">
+            <form string="Choose your branch">
+                <h1><p>MUTI and Honda MC</p></h1>
+                <group col="4">
+                    <field name="end_date" required="1"/>
+                </group>
+                <footer>
+                    <button name="get_dis_excel_report" string="XLSXexport" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="scm_distribution_action">
+        <field name="name">SCM Report</field>
+        <field name="res_model">scm.distribution</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="scm_abc.scm_distribution_form_views"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
