@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+scm_admin_acess_config,Admin Config,model_scm_config,scm_admin,1,1,1,1
+scm_admin_acess_raw,Admin Raw,model_scm_raw,scm_admin,1,1,1,1
+
+scm_user_acess_raw,User Raw,model_scm_raw,scm_user,1,1,1,1
+scm_user_acess_config,User Config,model_scm_config,scm_user,1,1,1,1
+
+
+
+
+
+
