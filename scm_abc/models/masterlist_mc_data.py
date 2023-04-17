@@ -19,7 +19,6 @@ class ScmMasterLiskMcData(models.Model):
     cost = fields.Float(string='Cost')
 
     def load_master_mc(self):
-        print("LODLODiitttininininiin Master list MC")
 
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()

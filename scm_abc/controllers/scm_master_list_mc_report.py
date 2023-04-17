@@ -86,7 +86,6 @@ class ScmABCExcelReportController(http.Controller):
         m_data = cur.fetchall()
         # m_data = request.env['scm.master.list.mc']
         for data_m in m_data:
-            print('mmmmmmmmassssssss',data_m)
             # the report content
             sheet.write(row, 0, data_m[1], text_style)
             sheet.write(row, 1, data_m[2], text_style)
@@ -105,80 +104,3 @@ class ScmABCExcelReportController(http.Controller):
         cur.close()
         return response
 
-        # conn = None
-        # p_data = []
-        # try:
-        #     conf = request.env['scm.config'].search([('active', '=', True)], limit=1)
-        #     print("connection dndbdbddbdbdb: ", conf.port)
-        #
-        #     params = {
-        #         'host': conf.host,
-        #         'dbname': conf.database,
-        #         'port': conf.port,
-        #         'user': conf.user,
-        #         'password': conf.password
-        #     }
-        #
-        #     # read connection parameters
-        #     # conn =
-        #     # params = conn
-        #     # print('From Config Connecting to the PostgreSQL database...', params)
-        #
-        #     # connect to the PostgreSQL server
-        #     print('Connecting to the PostgreSQL database...')
-        #     conn = psycopg2.connect(**params)
-        #
-        #     # create a cursor
-        #     cur = conn.cursor()
-        #
-        #     # execute a statement
-        #     print('PostgreSQL database version:')
-        #     cur.execute("""select c.company_id, d.name, a.id, a.barcode, a.default_code, b.name, c.name, e.quantity,
-        #                                      e.location_id, f.name, f.complete_name, g.name
-        #                                      from product_product a, product_template b, stock_production_lot c, res_company d, stock_quant e,
-        #                                      stock_location f, stock_warehouse g
-        #                                      where b.id = a.product_tmpl_id
-        #                                      and b.id = c.product_id
-        #                                      and d.id = c.company_id
-        #                                      and c.id = e.lot_id
-        #                                      and f.id = e.location_id
-        #                                      and g.lot_stock_id = f.id
-        #                                      and c.company_id = 2
-        #                                      and f.name = 'Stock'
-        #                                      order by a.id asc""")
-        #
-        #     # display the PostgreSQL database server version
-        #     purchase = cur.fetchall()
-        #     for com in purchase:
-        #         # pp = p_data.append(com)
-        #         # print(com)
-        #         print(com[2], com[10], com[9], com[6], com[7], com[8])
-        #         # print(p_data)
-        #     # self.po_number = p_data
-        #
-        #     # print(db_version)
-        #
-        #     # search the sales order
-        #     # orders = request.env['sale.order'].search(
-        #     #     [('company_id', '=', company.id), ('date_order', '>=', wizard.start_date),
-        #     #      ('date_order', '<=', wizard.end_date)])
-        #     # for order in orders:
-        #     #     # the report content
-        #     #     sheet.write(row, 0, number, text_style)
-        #     #     sheet.write(row, 1, order.name, text_style)
-        #     #     sheet.write(row, 2, str(order.date_order), text_style)
-        #     #     sheet.write(row, 3, order.partner_id.name, text_style)
-        #     #     sheet.write(row, 4, order.amount_total, number_style)
-        #     #
-        #     #
-        #     #     row += 1
-        #     #     number += 1
-        #
-        #     # close the communication with the PostgreSQL
-        #     cur.close()
-        # except (Exception, psycopg2.DatabaseError) as error:
-        #     print(error)
-        # finally:
-        #     if conn is not None:
-        #         conn.close()
-        #         print('Database connection closed.')

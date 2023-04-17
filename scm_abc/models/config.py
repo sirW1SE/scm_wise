@@ -15,12 +15,6 @@ class ScmConfig(models.Model):
     password = fields.Char(string='Password')
     active = fields.Boolean(string="Active", default=True)
 
-    # # host = localhost
-    # # database = odoo_awb
-    # # port = 5422
-    # # user = odoo14wsl
-    # # password = odoo
-    #
     def scm_conn(self):
         """ Connect to the PostgreSQL database server """
         conf = self.env['scm.config'].search([('active', '=', True)], limit=1)
@@ -32,68 +26,7 @@ class ScmConfig(models.Model):
                       'port':conf.port,
                       'user':conf.user,
                       'password':conf.password}
-                                 # print('From Config Connecting to the PostgreSQL database...', params)
-
-                                 # connect to the PostgreSQL server
             print('Connecting to the PostgreSQL database...')
             conn = psycopg2.connect(**params)
             return conn
 
-            # create a cursor
-            # cur = conn.cursor()
-            #
-            # cur.execute('SELECT name, partner_id from res_company')
-            #
-            # # display the PostgreSQL database server version
-            # db_version = cur.fetchall()
-            # for com in db_version:
-            #     print(com)
-            # #
-            # print(db_version)
-            # cur.close()
-
-        # conn = None
-        # try:
-        #     conf = self.env.search([('active', '=', True)], limit=1)
-        #     print("connection dndbdbddbdbdb: ", conf.port)
-        #     print('POrt port...', self.port)
-        #     # read connection parameters
-        #     # conn =
-        #     # params = {host = "localhost",
-        #     #                  #                 database = "odoo_awb",
-        #     #                  #                 port = "5422",
-        #     #                  #                 user = "odoo14wsl",
-        #     #                  #                 password = "odoo"}
-        #     #                  # print('From Config Connecting to the PostgreSQL database...', params)
-        #     #
-        #     #                  # connect to the PostgreSQL server
-        #     #                  print('Connecting to the PostgreSQL database...')
-        #     conn = psycopg2.connect(
-        #         host="localhost",
-        #         database="odoo_awb",
-        #         port="5422",
-        #         user="odoo14wsl",
-        #         password="odoo")
-        #
-        #     # create a cursor
-        #     cur = conn.cursor()
-        #
-        #     # execute a statement
-        #     print('PostgreSQL database version:')
-        #     cur.execute('SELECT name, partner_id from res_company')
-        #
-        #     # display the PostgreSQL database server version
-        #     db_version = cur.fetchall()
-        #     for com in db_version:
-        #         print(com)
-        #
-        #     # print(db_version)
-        #
-        #     # close the communication with the PostgreSQL
-        #     cur.close()
-        # except (Exception, psycopg2.DatabaseError) as error:
-        #     print(error)
-        # finally:
-        #     if conn is not None:
-        #         conn.close()
-        #         print('Database connection closed.')
