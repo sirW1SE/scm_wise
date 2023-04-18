@@ -124,23 +124,23 @@ class ScmABCExcelReportController(http.Controller):
 
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()
-        cur.execute('''select b.barcode, c.name, c.brand, t.product_id, t.create_date, t.unit_cost
+        cur.execute('''select c.default_code, c.name, c.brand, t.product_id, t.create_date, t.unit_cost
                         from (
                           select product_id,
                                  create_date,
                                  unit_cost,
                                  row_number() over (partition by product_id order by create_date desc) as rn
                           from stock_valuation_layer
+                          where unit_cost <> 0
                         ) t
                         left outer join product_product b
                         on b.id = t.product_id
                         inner join product_template c
                         on c.id = b.product_tmpl_id
                         where rn = 1
-                        and t.unit_cost <> 0
                         and c.active = true
                         and c.tracking = 'serial'
-                        order by b.barcode''')
+                        order by c.default_code asc''')
 
         # display the PostgreSQL database server version
         distribution = cur.fetchall()
