@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <odoo>
     <data>
         <menuitem name="SCM ABC Report" id="scm_menu_distribution_report"
@@ -19,4 +20,50 @@
                   action="scm_abc.scm_config_action" sequence="4"
                   groups="scm_abc.scm_admin"/>
     </data>
+=======
+<odoo>
+    <data>
+        <menuitem name="SCM" id="scm_menu_distribution_report"
+                  sequence="1"
+                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>
+
+        <menuitem name="Report" id="scm_menu_main_report"
+                  parent="scm_menu_distribution_report" sequence="4"
+                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>
+
+        <menuitem name="Config" id="scm_menu_main_config"
+                  parent="scm_menu_distribution_report" sequence="5"
+                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>
+
+        <menuitem name="SCM Report" id="scm_distribution_menu"
+                  parent="scm_menu_main_report"
+                  action="scm_abc.scm_distribution_action" sequence="1"
+                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>
+
+        <menuitem name="Master List MC" id="scm_masterlist_menu"
+                  parent="scm_menu_main_report"
+                  action="scm_abc.master_list_mc_action" sequence="2"
+                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>
+
+<!--        <menuitem name="Master List MC" id="scm_masterlist_menu2"-->
+<!--                  parent="scm_menu_distribution_report"-->
+<!--                  action="scm_abc.master_list_mc_data_action" sequence="2"-->
+<!--                  groups="scm_abc.scm_admin,scm_abc.scm_user"/>-->
+
+        <menuitem name="DB Conn" id="scm_db_conn_menu"
+                  parent="scm_menu_main_config"
+                  action="scm_abc.scm_config_action" sequence="1"
+                  groups="scm_abc.scm_admin"/>
+
+        <menuitem name="Area Code" id="scm_area_code_menu"
+                  parent="scm_menu_main_config"
+                  action="scm_abc.scm_area_code_action" sequence="2"
+                  groups="scm_abc.scm_admin"/>
+
+        <menuitem name="Product Ranking Matrix" id="scm_product_ranking_matrix_menu"
+                  parent="scm_menu_main_config"
+                  action="scm_abc.scm_product_ranking_matrix_action" sequence="3"
+                  groups="scm_abc.scm_admin"/>
+    </data>
+>>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc
 </odoo>

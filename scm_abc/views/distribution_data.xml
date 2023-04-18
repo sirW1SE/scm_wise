@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="master_distribution_data_form_views">
+        <field name="name">scm.distribution.data.form</field>
+        <field name="model">scm.distribution.data</field>
+        <field name="arch" type="xml">
+            <form string="Choose your branch">
+                <group col="4">
+                    <field name="product_id"/>
+                    <field name="company_id"/>
+                    <field name="branch"/>
+                    <field name="barcode"/>
+                    <field name="description"/>
+                    <field name="brand"/>
+                    <field name="three_mons_sale_qty"/>
+                    <field name="annually_sale_qty"/>
+                    <field name="inventory_as_qty"/>
+                    <field name="so_number"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="scm_distribution_data_tree_view">
+        <field name="name">scm.distribution.data.tree</field>
+        <field name="model">scm.distribution.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="company_id"/>
+                <field name="branch"/>
+                <field name="barcode"/>
+                <field name="description"/>
+                <field name="brand"/>
+                <field name="three_mons_sale_qty"/>
+                <field name="annually_sale_qty"/>
+                <field name="inventory_as_qty"/>
+                <field name="so_number"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="master_distributio_data_action">
+        <field name="name">scm.distribution.data.action</field>
+        <field name="res_model">scm.distribution.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

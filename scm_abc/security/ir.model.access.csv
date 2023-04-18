@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 scm_admin_acess_config,Admin Config,model_scm_config,scm_admin,1,1,1,1
@@ -13,3 +14,28 @@ scm_user_acess_config,User Config,model_scm_config,scm_user,1,1,1,1
 
 
 
+=======
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+scm_admin_acess_config,Admin Config,model_scm_config,scm_admin,1,1,1,1
+scm_admin_acess_distribution,Admin Distribution,model_scm_distribution,scm_admin,1,1,1,1
+scm_admin_acess_msterlist,Admin Masterlist,model_scm_master_list_mc,scm_admin,1,1,1,1
+scm_admin_acess_msterlist_data,Admin MasterlistData,model_scm_master_list_mc_data,scm_admin,1,1,1,1
+scm_admin_acess_area_code,Admin AreaCode,model_scm_area_code,scm_admin,1,1,1,1
+scm_admin_acess_product_ranking_matrix,Admin PraductRankMatrix,model_scm_product_ranking_matrix,scm_admin,1,1,1,1
+scm_admin_acess_distribution_data,Admin Distribution Data,model_scm_distribution_data,scm_admin,1,1,1,1
+
+scm_user_acess_distribution,User Distribution,model_scm_distribution,scm_user,1,1,1,1
+scm_user_acess_msterlist,User Masterlist,model_scm_master_list_mc,scm_user,1,1,1,1
+scm_user_acess_config,User Config,model_scm_config,scm_user,1,1,1,1
+scm_user_acess_msterlist_data,User MasterlistData,model_scm_master_list_mc_data,scm_user,1,1,1,1
+scm_user_acess_area_code,User AreaCode,model_scm_area_code,scm_user,1,1,1,1
+scm_user_acess_product_ranking_matrix,User PraductRankMatrix,model_scm_product_ranking_matrix,scm_user,1,1,1,1
+scm_user_acess_distribution_data,user Distribution Data,model_scm_distribution_data,scm_user,1,1,1,1
+
+
+
+
+
+
+>>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc

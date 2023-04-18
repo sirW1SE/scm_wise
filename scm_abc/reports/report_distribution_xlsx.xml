@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="distribution_report_xlsx_action" model="ir.actions.report">
@@ -8,4 +9,16 @@
         <field name="report_file">scm_abc.distribution_report_to_xlsx</field>
         <field name="binding_type">report</field>
     </record>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="distribution_report_xlsx_action" model="ir.actions.report">
+        <field name="name">distribution report</field>
+        <field name="model">scm_abc.scm.distribution</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">scm_abc.distribution_report_to_xlsx</field>
+        <field name="report_file">scm_abc.distribution_report_to_xlsx</field>
+        <field name="binding_type">report</field>
+    </record>
+>>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc
 </odoo>

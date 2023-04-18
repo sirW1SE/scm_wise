@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="master_list_mc_data_form_views">
+        <field name="name">SCM Master List MC Data Form</field>
+        <field name="model">scm.master.list.mc.data</field>
+        <field name="arch" type="xml">
+            <form string="Choose your branch">
+                <group col="4">
+                    <field name="barcode"/>
+                    <field name="description"/>
+                    <field name="remarks"/>
+                    <field name="brand"/>
+                    <field name="cost"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="scm_master_data_tree_view">
+        <field name="name">data.master.list.mc.tree</field>
+        <field name="model">scm.master.list.mc.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="barcode"/>
+                <field name="description"/>
+                <field name="remarks"/>
+                <field name="brand"/>
+                <field name="cost"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="master_list_mc_data_action">
+        <field name="name">Master list MC data</field>
+        <field name="res_model">scm.master.list.mc.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>
