@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <odoo>
     <data>
         <record model="ir.ui.view" id="scm_config_form_view_">
@@ -41,48 +40,4 @@
             <field name="view_mode">tree,form</field>
         </record>
     </data>
-=======
-<odoo>
-    <data>
-        <record model="ir.ui.view" id="scm_config_form_view_">
-            <field name="name">SCM config form</field>
-            <field name="model">scm.config</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group string="SCM Config" col="4">
-                            <field name="host"/>
-                            <field name="database"/>
-                            <field name="port"/>
-                            <field name="user"/>
-                            <field name="password"/>
-                            <field name="active"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="scm_config_tree_view_">
-            <field name="name">SCM config list</field>
-            <field name="model">scm.config</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="host"/>
-                    <field name="database"/>
-                    <field name="port"/>
-                    <field name="user"/>
-                    <field name="password"/>
-                    <field name="active"/>
-                </tree>
-            </field>
-        </record>
-
-        <!-- actions opening views on models -->
-        <record model="ir.actions.act_window" id="scm_config_action">
-            <field name="name">SCM config</field>
-            <field name="res_model">scm.config</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-    </data>
->>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc
 </odoo>

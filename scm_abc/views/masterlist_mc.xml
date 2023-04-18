@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record model="ir.ui.view" id="master_list_mc_form_views">
-        <field name="name">SCM Master List MC Form</field>
-        <field name="model">scm.master.list.mc</field>
-        <field name="arch" type="xml">
-            <form string="Choose your branch">
-                <group>
-                    <h1><p>Master List MC Report</p></h1>
-                </group>
-                <footer>
-                    <button name="get_master_list_mc_report" string="XLSXexport" type="object" class="oe_highlight"/>
-                    <button string="Cancel" class="btn-default" special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
-     <record model="ir.actions.act_window" id="master_list_mc_action">
-        <field name="name">Master list MC</field>
-        <field name="res_model">scm.master.list.mc</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="scm_abc.master_list_mc_form_views"/>
-        <field name="target">new</field>
-    </record>
-=======
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="master_list_mc_form_views">
@@ -52,5 +25,4 @@
         <field name="view_id" ref="scm_abc.master_list_mc_form_views"/>
         <field name="target">new</field>
     </record>
->>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc
 </odoo>

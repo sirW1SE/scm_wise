@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="scm_purchase_view_per_branch" model="ir.ui.view">
@@ -25,31 +24,3 @@
         <field name="target">new</field>
     </record>
 </odoo>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="scm_purchase_view_per_branch" model="ir.ui.view">
-        <field name="name">SCM Purchase Per Branch</field>
-        <field name="model">scm.purchase.view</field>
-        <field name="arch" type="xml">
-            <form string="Choose your branch">
-                <group>
-                    <field name="location_id" />
-                </group>
-                <footer>
-                    <button name="open_table" string="View Stock" type="object" class="btn-primary"/>
-                    <button string="Cancel" class="btn-default" special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-    <record id="action_purchase_view_per_branch" model="ir.actions.act_window">
-        <field name="name">SCM Purchase</field>
-        <field name="res_model">scm.purchase.view</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="scm_abc.scm_purchase_view_per_branch"/>
-        <field name="target">new</field>
-    </record>
-</odoo>
->>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc

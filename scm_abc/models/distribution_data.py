@@ -28,6 +28,7 @@ class ScmDistibutionData(models.Model):
     # ]
 
     def load_data(self):
+        print("LODLODiitttininininiin")
 
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()

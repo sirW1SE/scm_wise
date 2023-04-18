@@ -16,6 +16,7 @@ class ScmAreaCode(models.Model):
     area_code = fields.Char(string='Area Code')
 
     def loadinit(self):
+        print("LODLODiitttininininiin Area Code")
 
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()

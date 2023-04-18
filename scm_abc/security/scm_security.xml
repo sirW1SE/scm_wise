@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
@@ -12,18 +11,3 @@
 
 </odoo>
 
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-
-    <record id="scm_admin" model="res.groups">
-        <field name="name">SCM Administrators</field>
-    </record>
-
-    <record id="scm_user" model="res.groups">
-        <field name="name">SCM User</field>
-    </record>
-
-</odoo>
-
->>>>>>> 291cf88f137f7da43aafb1270b86f6565dba0dbc
