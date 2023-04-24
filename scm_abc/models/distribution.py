@@ -18,6 +18,7 @@ class ScmDistibution(models.Model):
     end_date = fields.Date("End Date")
 
     def get_dis_excel_report(self):
+        self.env['scm.area.code'].load_area()
         return {
             'type': 'ir.actions.act_url',
             'url': '/scm_abc/get_dis_excel_report/%s' % (self.id),

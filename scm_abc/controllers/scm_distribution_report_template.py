@@ -90,6 +90,60 @@ class ScmABCExcelReportController(http.Controller):
         sheet3.merge_range('A1:D1', 'Inventory as of ' + str(wizard.end_date), title_style)
         # end of sheet 3
 
+        # start of sheet 4
+        sheet4 = workbook.add_worksheet('Distribution')
+        # set the orientation to landscape
+        sheet4.set_landscape()
+        # set up the paper size, 9 means A4
+        sheet4.set_paper(9)
+        # set up the margin in inch
+        sheet4.set_margins(0.5, 0.5, 0.5, 0.5)
+
+        # set up the column width
+        sheet4.set_column('A:E', 20)
+        sheet4.set_column('B:B', 60)
+
+        # the report title
+        # merge the A1 to E1 cell and apply the style font size : 14, font weight : bold
+        sheet4.merge_range('A1:M1', 'Distribution as of ' + str(wizard.end_date), title_style)
+        # end of sheet 4
+
+        # start of sheet 5
+        sheet5 = workbook.add_worksheet('Sheet4')
+        # set the orientation to landscape
+        sheet5.set_landscape()
+        # set up the paper size, 9 means A4
+        sheet5.set_paper(9)
+        # set up the margin in inch
+        sheet5.set_margins(0.5, 0.5, 0.5, 0.5)
+
+        # set up the column width
+        sheet5.set_column('A:D', 20)
+        sheet5.set_column('B:B', 60)
+
+        # the report title
+        # merge the A1 to E1 cell and apply the style font size : 14, font weight : bold
+        sheet5.merge_range('A1:D1', 'Product List', title_style)
+        # end of sheet 5
+
+        # start of sheet 6
+        sheet6 = workbook.add_worksheet('AreaCode')
+        # set the orientation to landscape
+        sheet6.set_landscape()
+        # set up the paper size, 9 means A4
+        sheet6.set_paper(9)
+        # set up the margin in inch
+        sheet6.set_margins(0.5, 0.5, 0.5, 0.5)
+
+        # set up the column width
+        sheet6.set_column('A:B', 20)
+        sheet6.set_column('B:B', 60)
+
+        # the report title
+        # merge the A1 to E1 cell and apply the style font size : 14, font weight : bold
+        sheet6.merge_range('A1:B1', 'Area Code', title_style)
+        # end of sheet 5
+
         # sheet 1 column  # table title sheet
         sheet.write(1, 0, 'Barcode', header_style)
         sheet.write(1, 1, 'Description', header_style)
@@ -121,6 +175,40 @@ class ScmABCExcelReportController(http.Controller):
 
         row3 = 2
         number3 = 1
+
+        # sheet5 column # table title sheet 5
+        sheet5.write(1, 0, 'Barcode', header_style)
+        sheet5.write(1, 1, 'Description', header_style)
+        sheet5.write(1, 2, 'Brand', header_style)
+        sheet5.write(1, 3, 'Model', header_style)
+
+        row5 = 2
+        number5 = 1
+
+        # sheet 4 column  # table title sheet
+        sheet4.write(1, 0, 'Code', header_style)
+        sheet4.write(1, 1, 'Priority', header_style)
+        sheet4.write(1, 2, 'Class', header_style)
+        sheet4.write(1, 3, 'Barcode', header_style)
+        sheet4.write(1, 4, 'Description', header_style)
+        sheet4.write(1, 5, 'Branch', header_style)
+        sheet4.write(1, 6, 'Area', header_style)
+        sheet4.write(1, 7, 'Brand', header_style)
+        sheet4.write(1, 8, '3Mo sale', header_style)
+        sheet4.write(1, 9, 'Inventory as of', header_style)
+        sheet4.write(1, 10, 'BR DoI', header_style)
+        sheet4.write(1, 11, 'Max Stock', header_style)
+        sheet4.write(1, 12, 'Suggest Transfer', header_style)
+
+        row4 = 2
+        number4 = 1
+
+        # sheet6 column # table title sheet 6
+        sheet6.write(1, 0, 'Branch Name', header_style)
+        sheet6.write(1, 1, 'Area Code', header_style)
+
+        row6 = 2
+        number6 = 1
 
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()
@@ -157,22 +245,30 @@ class ScmABCExcelReportController(http.Controller):
         companies = '(1,2)'
         date_to = wizard.end_date
         cur2.execute('''SELECT c.default_code, c.name as raw_desc, c.brand, c.model, e.name as branch,
-                                    COUNT(CASE WHEN (date(b.date_order) >= (date('%s') - interval '30 days') 
-                                    AND date(b.date_order) <= '%s') THEN a.product_id end) as ms_a,
-                                    COUNT(CASE WHEN (date(b.date_order) >= (date('%s') - interval '60 days') 
-                                    AND date(b.date_order) <= '%s') THEN a.product_id end) as ms_b,
-                                    COUNT(CASE WHEN (date(b.date_order) >= (date('%s') - interval '90 days') 
-                                    AND date(b.date_order) <= '%s') THEN a.product_id end) as ms_c
-                                    FROM ((sale_order_line a FULL JOIN sale_order b ON a.order_id = b.id) 
-                                    FULL JOIN (product_template c FULL JOIN product_product d 
-                                    ON c.id = d.product_tmpl_id) ON a.product_id = d.id), stock_warehouse e 
-                                    WHERE a.company_id IN (1,2) AND b.state IN ('sale','done')
-                                    AND b.warehouse_id = e.id AND c.type = 'product' AND c.tracking = 'serial'
-                                    AND b.date_order BETWEEN (date('%s') - interval '90 days') 
-                                    AND ('%s') AND b.partner_id NOT IN (1,8,9)  
-                                    GROUP BY c.name, c.brand, c.model, e.name, c.default_code
-                                    ORDER by c.name
-                        ''' % (date_to, date_to, date_to, date_to, date_to, date_to, date_to, date_to))
+                            SUM (CASE WHEN date(b.date_order) >= date_trunc('month', DATE '%s')
+                            AND date(b.date_order) <= '%s'
+                            AND EXTRACT(YEAR FROM b.date_order) = EXTRACT(YEAR FROM DATE '%s')
+                            THEN a.qty_delivered end) as ms_a,
+                            SUM (CASE WHEN EXTRACT(MONTH FROM b.date_order)
+                            = EXTRACT(MONTH FROM DATE '%s' - interval '1 month')
+                            AND EXTRACT(YEAR FROM b.date_order) =
+                            EXTRACT(YEAR FROM DATE '%s' - interval '1 month')
+                            THEN a.qty_delivered end) as ms_b,
+                            SUM (CASE WHEN EXTRACT(MONTH FROM b.date_order)
+                            = EXTRACT(MONTH FROM DATE '%s' - interval '2 month')
+                            AND EXTRACT(YEAR FROM b.date_order) =
+                            EXTRACT(YEAR FROM DATE '%s' - interval '2 month')
+                            THEN a.qty_delivered end) as ms_c
+                            FROM ((sale_order_line a FULL JOIN sale_order b ON a.order_id = b.id)
+                            FULL JOIN (product_template c FULL JOIN product_product d
+                            ON c.id = d.product_tmpl_id) ON a.product_id = d.id), stock_warehouse e
+                            WHERE a.company_id IN (1,2) AND b.state IN ('sale','done')
+                            AND b.warehouse_id = e.id AND c.type = 'product' AND c.tracking = 'serial'
+                            AND date(b.date_order) >= date_trunc('month', DATE '%s' - interval '2 month')
+                            AND date(b.date_order) <= '%s' AND b.partner_id NOT IN (1,8,9)  
+                            GROUP BY c.default_code, c.name, c.brand, c.model, e.name
+                            ORDER by c.name
+                ''' % (date_to, date_to, date_to, date_to, date_to, date_to, date_to, date_to, date_to))
 
         # display the PostgreSQL database server version
         raw = cur2.fetchall()
@@ -231,6 +327,65 @@ class ScmABCExcelReportController(http.Controller):
             number3 += 1
         # end of sheet3
 
+        cur5 = conn.cursor()
+        cur5.execute('''select b.default_code as barcode, b.name as description, b.brand as brand, b.model as model 
+                                           from product_product a
+                                           inner join product_template b on a.product_tmpl_id = b.id
+                                           where a.active = true
+                                           and b.tracking = 'serial'                               
+                                           order by b.default_code asc''')
+
+        # display the PostgreSQL database server version
+        distribution5 = cur5.fetchall()
+        for data5 in distribution5:
+            # the report content
+            sheet5.write(row5, 0, data5[0], text_style)
+            sheet5.write(row5, 1, data5[1], text_style)
+            sheet5.write(row5, 2, data5[2], text_style)
+            sheet5.write(row5, 3, data5[3], text_style)
+
+            row5 += 1
+            number5 += 1
+
+        # start of sheet4
+        cur4 = conn.cursor()
+        cur4.execute('''select b.default_code as barcode, b.name as description, b.brand as brand from product_product a
+                       inner join product_template b on a.product_tmpl_id = b.id
+                       where a.active = true
+                       and b.tracking = 'serial'
+                       order by b.default_code asc''')
+        distribution4 = cur4.fetchall()
+        for d_dis4 in distribution4:
+            sheet4.write(row4, 0, '', text_style)
+            sheet4.write(row4, 1, '', text_style)
+            sheet4.write(row4, 2, '', text_style)
+            sheet4.write(row4, 3, d_dis4[0], text_style)
+            sheet4.write(row4, 4, d_dis4[1], text_style)
+            sheet4.write(row4, 5, '=VLOOKUP(D%s,sheet2!A3:I1500, 6, 0)' % (row4 + 1), text_style)
+            sheet4.write(row4, 6, '=VLOOKUP(F%s,AreaCode!A3:B200, 2, 0)' % (row4 + 1), text_style)
+            sheet4.write(row4, 7, d_dis4[2], text_style)
+            sheet4.write(row4, 8, '=VLOOKUP(D%s,sheet2!A3:G1500, 7, 0)' % (row4 + 1), text_style)
+            sheet4.write(row4, 9, '=VLOOKUP(D%s,sheet3!A3:J1500, 4, 0)' % (row4 + 1), text_style)
+            sheet4.write(row4, 10, 'DoI', text_style)
+            sheet4.write(row4, 11, '', text_style)
+            sheet4.write(row4, 12, '', text_style)
+
+            row4 += 1
+            number4 += 1
+            # End of Sheet 4
+
+        # start of sheet6
+        request.cr.execute('''select a.branch_name as branch, a.area_code as code
+                                        from scm_area_code a''')
+        distribution6 = request.cr.fetchall()
+        for d_dis6 in distribution6:
+            sheet6.write(row6, 0, d_dis6[0], text_style)
+            sheet6.write(row6, 1, d_dis6[1], text_style)
+
+            row6 += 1
+            number6 += 1
+        # End of Sheet 5
+
         workbook.close()
         output.seek(0)
         response.stream.write(output.read())
@@ -238,4 +393,6 @@ class ScmABCExcelReportController(http.Controller):
         cur.close()
         cur2.close()
         cur3.close()
+        cur5.close()
+        cur4.close()
         return response

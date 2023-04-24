@@ -15,14 +15,13 @@ class ScmAreaCode(models.Model):
     branch_name = fields.Char(string='Barcode')
     area_code = fields.Char(string='Area Code')
 
-    def loadinit(self):
-        print("LODLODiitttininininiin Area Code")
-
+    def load_area(self):
         conn = request.env['scm.config'].scm_conn()
         cur = conn.cursor()
         cur.execute('''select f.id, g.name as branch, f.complete_name as stocklocation
                             from stock_location f, stock_warehouse g
                             where g.lot_stock_id = f.id
+                            and f.company_id IN(1,2) 
                             group by branch,f.complete_name, f.id order by stocklocation asc''')
         db_version = cur.fetchall()
         for rec in db_version:
