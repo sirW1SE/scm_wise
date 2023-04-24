@@ -248,17 +248,17 @@ class ScmABCExcelReportController(http.Controller):
                             SUM (CASE WHEN date(b.date_order) >= date_trunc('month', DATE '%s')
                             AND date(b.date_order) <= '%s'
                             AND EXTRACT(YEAR FROM b.date_order) = EXTRACT(YEAR FROM DATE '%s')
-                            THEN a.qty_delivered end) as ms_a,
+                            THEN a.product_uom_qty end) as ms_a,
                             SUM (CASE WHEN EXTRACT(MONTH FROM b.date_order)
                             = EXTRACT(MONTH FROM DATE '%s' - interval '1 month')
                             AND EXTRACT(YEAR FROM b.date_order) =
                             EXTRACT(YEAR FROM DATE '%s' - interval '1 month')
-                            THEN a.qty_delivered end) as ms_b,
+                            THEN a.product_uom_qty end) as ms_b,
                             SUM (CASE WHEN EXTRACT(MONTH FROM b.date_order)
                             = EXTRACT(MONTH FROM DATE '%s' - interval '2 month')
                             AND EXTRACT(YEAR FROM b.date_order) =
                             EXTRACT(YEAR FROM DATE '%s' - interval '2 month')
-                            THEN a.qty_delivered end) as ms_c
+                            THEN a.product_uom_qty end) as ms_c
                             FROM ((sale_order_line a FULL JOIN sale_order b ON a.order_id = b.id)
                             FULL JOIN (product_template c FULL JOIN product_product d
                             ON c.id = d.product_tmpl_id) ON a.product_id = d.id), stock_warehouse e
