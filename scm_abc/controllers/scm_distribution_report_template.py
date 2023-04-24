@@ -286,6 +286,7 @@ class ScmABCExcelReportController(http.Controller):
 
             row2 += 1
             number2 += 1
+
         # end of sheet 2
         cur3 = conn.cursor()
         cur3.execute('''WITH sq as (select sq.company_id ppcompany, pt.name, sw.name, pt.brand, pt.default_code as barcode,  
